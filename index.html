@@ -35,8 +35,12 @@
         <textarea class="password" readonly id="password" placeholder="Your Secure Password"
             aria-label="Generated Password"></textarea>
         <hr>
-        <button id="generate">Generate Password</button>
-        <button id="copy">Copy to Clipboard</button>
+        <div class="row">
+            <div class="col-md-12">
+                <button id="generate">Generate Password</button>
+                <button id="copy">Copy to Clipboard</button>
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -59,12 +63,11 @@
             alert("You have not selected any character types. Please try again.");
             window.location.reload(false);
         }
-        // Store choices and display password once user clicks "Generate Password"
         var allFunct = {
+            symbol: randomChar,
+            number: randomNumber,
             lower: randomLower,
             upper: randomUpper,
-            number: randomNumber,
-            symbol: randomChar
         }
 
         btnGenerateEl.addEventListener("click", function() {
@@ -76,12 +79,13 @@
             
             txtPasswordEl.innerText = generatePassword(yesSymbol, yesNumber, yesLower, yesUpper, pwLength);
         })
-
-        function generatePassword(lower, upper, number, symbol, length) {
+        
+        // Display password once user clicks "Generate Password" based on choices made from prompt/confirms
+        function generatePassword(symbol, number, lower, upper, length) {
             var passwordResult = "";
-            var charTypes = lower + upper + number + symbol;
+            var charTypes = symbol + number + lower + upper;
 
-            var charTypesArr = [{lower}, {upper}, {number}, {symbol}].filter(
+            var charTypesArr = [{symbol}, {number}, {lower}, {upper}].filter(
                 item => Object.values(item)[0]
             );
 
@@ -95,6 +99,15 @@
             return passwordResult;
         }
 
+        // Create functions to return random options from different character sets
+        function randomChar () {
+            var specChar = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+            return specChar[Math.floor(Math.random() * specChar.length)];
+        }
+        function randomNumber() {
+            var numbers = "0123456789";
+            return numbers[Math.floor(Math.random() * numbers.length)];
+        }
         function randomLower() {
             var lowerLetters = "abcdefghijklmnopqrstuvwxyz";
             return lowerLetters[Math.floor(Math.random() * lowerLetters.length)];
@@ -103,16 +116,7 @@
             var upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             return upperLetters[Math.floor(Math.random() * upperLetters.length)];
         }
-        function randomNumber() {
-            var numbers = "0123456789";
-            return numbers[Math.floor(Math.random() * numbers.length)];
-        }
-        function randomChar () {
-            var specChar = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
-            return specChar[Math.floor(Math.random() * specChar.length)];
-        }
-        // Copy password to clipboard when user clicks "Copy to Clipboard"
-
+        // Copy password to clipboard when user clicks button
     </script>
 </body>
 

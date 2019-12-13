@@ -19,6 +19,7 @@ header {
     max-width: 960px;
     background-color: white;
     margin: 0 auto;
+    height: auto;
     box-shadow: 3px 7px 18px #888888;
 }
 
@@ -54,4 +55,10 @@ button {
 #copy {
     float: right;
     background-color: #D2D2D2;
+}
+
+@media only screen and (max-width: 395px) {
+    #copy {
+        float: left;
+    }
 }
