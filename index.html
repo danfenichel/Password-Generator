@@ -68,8 +68,32 @@
         }
 
         btnGenerateEl.addEventListener("click", function() {
+            var pwLength = +length;
+            var yesSymbol = confSpecChar;
+            var yesNumber = confNumbers;
+            var yesLower = confLowerCase;
+            var yesUpper = confUpperCase;
             
+            txtPasswordEl.innerText = generatePassword(yesSymbol, yesNumber, yesLower, yesUpper, pwLength);
         })
+
+        function generatePassword(lower, upper, number, symbol, length) {
+            var passwordResult = "";
+            var charTypes = lower + upper + number + symbol;
+
+            var charTypesArr = [{lower}, {upper}, {number}, {symbol}].filter(
+                item => Object.values(item)[0]
+            );
+
+            for(var i = 0; i < length; i += charTypes) {
+                charTypesArr.forEach(type => {
+                    var functName = Object.keys(type)[0];
+
+                    passwordResult += allFunct[functName]();
+                });
+            }
+            return passwordResult;
+        }
 
         function randomLower() {
             var lowerLetters = "abcdefghijklmnopqrstuvwxyz";
