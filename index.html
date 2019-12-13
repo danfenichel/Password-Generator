@@ -46,11 +46,6 @@
         var btnCopyEl = document.getElementById("copy");
         // Prompt the user to choose a character length between 8-128 characters
         var length = prompt("How many characters do you want in your password? Please enter a number between 8 and 128.");
-        // Validate that number input is between 8-128 characters; if it isn't alert the user
-        if (length < 8 || length > 128) {
-            alert("You have entered an invalid number. Please enter a number between 8 and 128.");
-            prompt("How many characters do you want in your password? Please enter a number between 8 and 128.");
-        }
         // Have user confirm if there should be special characters
         var confSpecChar = confirm("Do you want to include special characters?");
         // Have user confirm if there should be numbers
@@ -65,11 +60,34 @@
             window.location.reload(false);
         }
         // Store choices and display password once user clicks "Generate Password"
+        var allFunct = {
+            lower: randomLower,
+            upper: randomUpper,
+            number: randomNumber,
+            symbol: randomChar
+        }
+
+        btnGenerateEl.addEventListener("click", function() {
+            
+        })
+
         function randomLower() {
             var lowerLetters = "abcdefghijklmnopqrstuvwxyz";
-            return lowerLetters = [Math.floor(Math.random() * lowerLetters.length)];
+            return lowerLetters[Math.floor(Math.random() * lowerLetters.length)];
         }
-    // Copy password to clipboard when user clicks "Copy to Clipboard"
+        function randomUpper() {
+            var upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return upperLetters[Math.floor(Math.random() * upperLetters.length)];
+        }
+        function randomNumber() {
+            var numbers = "0123456789";
+            return numbers[Math.floor(Math.random() * numbers.length)];
+        }
+        function randomChar () {
+            var specChar = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+            return specChar[Math.floor(Math.random() * specChar.length)];
+        }
+        // Copy password to clipboard when user clicks "Copy to Clipboard"
 
     </script>
 </body>
